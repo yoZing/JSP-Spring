@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+
+	<context-param>
+		<param-name>message</param-name>
+		<param-value>good day!</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>com.jsp.listener.TestListener</listener-class>
+	</listener>
+	
+</web-app>
