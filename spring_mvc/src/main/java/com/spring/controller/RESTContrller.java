@@ -6,13 +6,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
+// @Controller
+@RestController
 public class RESTContrller {
 	
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -29,7 +34,8 @@ public class RESTContrller {
 		
 		dataMap.put("temp", tempMap);
 	}
-	
+
+	/*
 	@RequestMapping(value = "/rest/old", method = RequestMethod.GET)
 	public void restOld(HttpServletResponse response) throws Exception{
 		
@@ -40,5 +46,31 @@ public class RESTContrller {
 		PrintWriter out = response.getWriter();
 		
 		out.print(mapper.writeValueAsString(dataMap));
+		
+		out.close();
+	}
+	*/
+	
+	@RequestMapping(value = "/rest/spring", method = RequestMethod.GET)
+	// @ResponseBody
+	public Map<String, Object> restSpring() {
+		return dataMap;
+	}
+	
+	@RequestMapping(value = "/rest/best", method = RequestMethod.GET)
+	// @ResponseBody
+	public ResponseEntity<Map<String, Object>> restSpringBest() throws Exception {
+		
+		ResponseEntity<Map<String, Object>> result = null;
+		
+		try {
+			if (1 == 1) throw new Exception();
+			
+			result = new ResponseEntity<Map<String, Object>>(dataMap, HttpStatus.OK);
+		} catch (Exception e) {
+			result = new ResponseEntity<Map<String, Object>>(dataMap, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return result;
 	}
 }

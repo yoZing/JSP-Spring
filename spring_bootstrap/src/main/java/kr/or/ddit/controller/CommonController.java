@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jsp.dto.MenuVO;
 import com.jsp.exception.IdNotFoundException;
@@ -30,6 +33,13 @@ public class CommonController {
 //	@Resource(name = "memberService")
 //	LoginSeachMemberService loginSeachMemberService;
 	
+	@RequestMapping("/main")
+	public String main() {
+		String url = "home";
+		
+		return url;
+	}
+	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model) throws Exception {
 		String url = "common/indexPage";
@@ -43,15 +53,6 @@ public class CommonController {
 		return url;
 	}
 	
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() throws Exception {}
-	
-	@RequestMapping(value = "/subMenu", method = RequestMethod.GET)
-	public void subMenu(String mCode) throws Exception {
-		menuService.getSubMenuList(mCode);
-		
-		
-	}
 	
 	@RequestMapping(value = "/common/loginForm", method = RequestMethod.GET)
 	public void loginForm() {}
@@ -88,4 +89,23 @@ public class CommonController {
 		return url;
 	}
 	
+	@RequestMapping(value = "/subMenu")
+	@ResponseBody
+	public ResponseEntity<List<MenuVO>> subMenuToJSON(String mCode) throws Exception {
+		
+		ResponseEntity<List<MenuVO>> entity = null;
+		
+		List<MenuVO> subMenu = null;
+		
+		try {
+			subMenu = menuService.getSubMenuList(mCode);
+			
+			entity = new ResponseEntity<List<MenuVO>>(subMenu, HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<List<MenuVO>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+		}
+		
+		return entity;
+	}
 }

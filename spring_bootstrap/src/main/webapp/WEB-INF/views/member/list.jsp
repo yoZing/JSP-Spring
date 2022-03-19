@@ -130,7 +130,7 @@
   
 <script>
 	window.onload = function() {
-		MemberPictureThumb('<%=request.getContextPath() %>');
+		MemberPictureThumb('<%=request.getContextPath()%>');
 	}
 </script>  
   

@@ -13,6 +13,13 @@
 <title>공지목록</title>
 
 <body>
+	<script>
+		<c:if test="${from eq 'regist'}">
+			alert("공지사항 등록이 성공했습니다.");
+			window.opener.location.reload();
+			window.close();
+		</c:if>
+	</script>
 	<!-- Main content -->
 	<section class="content-header">
 	  	<div class="container-fluid">
