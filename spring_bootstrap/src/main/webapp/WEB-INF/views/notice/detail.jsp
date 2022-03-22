@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <head></head>
 
@@ -80,21 +81,16 @@
 		location.href = "remove.do?nno=" + nno;
 	}
 
+	<c:if test="${from eq 'modify'}">
+		alert("수정되었습니다.");
+	</c:if>
+	<c:if test="${from eq 'remove'}">
+		alert("삭제되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</c:if>
 
 </script>
 
 
 </body>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <head>
  <!-- summernote -->
@@ -53,10 +53,10 @@
 								<label for="title">제 목</label> 
 								<input type="text" id="title" value="${pds.title }"
 									name='title' class="form-control" placeholder="제목을 쓰세요">
-							</div>
+							</div>a
 							<div class="form-group">
 								<label for="content">내 용</label>
-								<textarea id="content" name="content">${pds.content }</textarea>
+								<textarea id="content" name="content">${fn:escapeXml(pds.content) }</textarea>
 							</div>
 							
 							<div class="form-group">								

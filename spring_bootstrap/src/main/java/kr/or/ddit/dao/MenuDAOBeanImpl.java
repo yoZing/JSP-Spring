@@ -21,7 +21,6 @@ public class MenuDAOBeanImpl implements MenuDAOBean {
 		this.menuDAO = menuDAO;
 	}
 	
-	
 	@Override
 	public List<MenuVO> selectMainMenu() throws SQLException {
 		return menuDAO.selectMainMenu(session);

@@ -51,7 +51,7 @@
 				<div id="keyword" class="card-tools" style="width:450px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
-					  		onchange="list_go();">
+					  		onchange="list_go(1);">
 					  		<option value="10" >정렬개수</option>
 					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
 					  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
@@ -97,7 +97,7 @@
 						<tr style='font-size:0.85em;'>
 							<td>${board.bno }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-								<a href="javascript:OpenWindow('detail.do?bno=${board.bno }','상세보기',800,700);">
+								<a href="javascript:OpenWindow('detail.do?bno=${board.bno }&from=list','상세보기',800,700);">
 									<span class="col-sm-12 ">${board.title }
 										<c:if test="${board.replycnt ne 0 }">		
 											<span class="nav-item">															
@@ -124,6 +124,14 @@
 		
     </section>
     <!-- /.content -->
+    
+    <c:if test="${from eq 'regist' }">
+    	<script>
+    		alert("등록되었습니다.");
+    		window.opener.location.reload();
+    		window.close();
+    	</script>
+    </c:if>
 
 
 </body>

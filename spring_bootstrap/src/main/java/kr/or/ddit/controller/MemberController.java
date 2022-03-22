@@ -1,25 +1,19 @@
 package kr.or.ddit.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,44 +32,19 @@ public class MemberController {
 
 	@Autowired
 	private LoginSearchMemberService memberService;
+	
+	@Autowired
+	private ExceptionLoggerHelper exceptionLogger;
 
 	@Resource(name = "picturePath")
 	private String picturePath;
+	
+	
 
 	@RequestMapping(value = "/main")
 	public void main() {
 	}
 
-	@RequestMapping("/list")
-	public ModelAndView list(Criteria cri, ModelAndView mnv) throws SQLException {
-
-		String url = "member/list";
-
-		Map<String, Object> dataMap = null;
-
-		try {
-			dataMap = memberService.getSearchMemberList(cri);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new SQLException();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		mnv.addObject("dataMap", dataMap);
-		// mnv.addAllObjectes(dataMap);
-		// 페이지 컨택스트 우어어
-
-		mnv.setViewName(url);
-
-		return mnv;
-	}
-
-	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
-	public void registForm() {
-	}
-	
 	public String savePicture(String oldPicture, MultipartFile multi) throws Exception {
 		
 		String fileName = null;
@@ -103,74 +72,38 @@ public class MemberController {
 		return fileName;
 	}
 	
-	
-	@RequestMapping(value = "/picture", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	@ResponseBody
-	  public ResponseEntity<String> getPicture(@RequestParam("pictureFile") MultipartFile multi, String oldPicture) throws Exception{
-		
-		ResponseEntity<String> entity = null;
-		
-		String result = "";
-		HttpStatus status = null;
-		
-		// 파일 저장 확인
-		if ((result = savePicture(oldPicture, multi)) == null) {
-			result = "업로드를 실패했습니다.";
-			status = HttpStatus.BAD_REQUEST;
-		} else {
-			status = HttpStatus.OK; 
-		}
-		
-		entity = new ResponseEntity<String>(result, status);
-		
-		return entity; 
-	  }
+	@RequestMapping("/list")
+	public ModelAndView list(Criteria cri, ModelAndView mnv, HttpServletRequest request) throws SQLException {
 
-	@RequestMapping(value = "/getPicture", produces = "text/plain;charset=utf-8")
-	@ResponseBody
-	public ResponseEntity<byte[]> getPicture(String id) throws Exception {
-		
-		String fileName = memberService.getMember(id).getPicture();
-		
-		InputStream in = null;
-		ResponseEntity<byte[]> entity = null;
-		String imgPath = picturePath;
-		
-		try {
-			in = new FileInputStream(new File(imgPath, fileName));
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.CREATED);
-			
-		} catch (IOException e) {
-			entity = new ResponseEntity<byte[]>(HttpStatus.INTERNAL_SERVER_ERROR);
-			
-		} finally {
-			in.close();
-		}
-		
-		return entity;
-	}
+		String url = "member/list";
 
-	@RequestMapping("/idCheck")
-	@ResponseBody
-	public ResponseEntity<String> idCheck(String id) throws Exception {
-		ResponseEntity<String> entity = null;
-		
+		Map<String, Object> dataMap = null;
+
 		try {
-			MemberVO member = memberService.getMember(id);
-			
-			if (member != null) {
-				entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);
-			} else {
-				entity = new ResponseEntity<String>("", HttpStatus.OK);
-			}
+			dataMap = memberService.getSearchMemberList(cri);
+			if (1 == 1) throw new SQLException();	// if로 터뜨리지 않으면  runtime에서 터져서 아예 실행안함
 			
 		} catch (SQLException e) {
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+			exceptionLogger.write(request, e, memberService.toString());
+			
+			throw e;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		return entity;
+
+		mnv.addObject("dataMap", dataMap);
+		// mnv.addAllObjectes(dataMap);
+		// 페이지 컨택스트 우어어
+
+		mnv.setViewName(url);
+
+		return mnv;
 	}
-	
+
+	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
+	public void registForm() {}
+
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String regist(MemberRegistCommand memberReq) throws Exception, IOException{
 		String url = "member/regist_success";

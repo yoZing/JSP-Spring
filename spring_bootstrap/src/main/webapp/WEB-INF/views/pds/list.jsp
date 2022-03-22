@@ -115,7 +115,14 @@
 			</div>
 		</div>
 	</section>
-
+	
+	<c:if test="${from eq 'regist' }">
+		<script>
+			alert("성공적으로 등록되었습니다.");
+			window.opener.location.reload();
+			window.close();
+		</script>
+	</c:if>
 </body>
 
 
