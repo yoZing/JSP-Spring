@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -8,7 +9,7 @@
 		select *
 		from menu
 		where mCode like '%'||'0000'||'%' 
-		order by mCode
+		order by mCode asc 
 	</select>
 	
 	<select id="selectSubMenu" resultType="menu">

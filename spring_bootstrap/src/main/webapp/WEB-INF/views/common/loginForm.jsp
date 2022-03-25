@@ -20,11 +20,11 @@
 
 			<form action="<%=request.getContextPath() %>/common/login.do"	method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="${pastID }" required autofocus>
+					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="${pastID }">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="pwd" placeholder="패스워드를 입력하세요." value="" required>
+					<input type="password" class="form-control" name="pwd" placeholder="패스워드를 입력하세요."  value="">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
@@ -42,8 +42,11 @@
 				</div>
 			</form>
 
+			
+
 			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
 			
+
 		</div>
 		<!-- /.login-box-body -->
 	  </div>	
@@ -51,6 +54,4 @@
 	<!-- /.login-box -->
 	
   </div>
-  
-
 </body>

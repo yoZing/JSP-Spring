@@ -12,10 +12,11 @@ import com.jsp.service.NoticeService;
 
 import kr.or.ddit.dao.NoticeDAOBean;
 
-public class NoticeServiceImpl implements NoticeService {
-
+public class NoticeServiceImpl implements NoticeService{
+	
 	private NoticeDAOBean noticeDAOBean;
-	public void setNoticeDAOBean(NoticeDAOBean noticeDAOBean) {
+
+	public void setNoticeDAO(NoticeDAOBean noticeDAOBean) {
 		this.noticeDAOBean = noticeDAOBean;
 	}
 
@@ -44,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public NoticeVO getNotice(int nno) throws SQLException {
 		noticeDAOBean.increaseViewCount(nno);
-
+		
 		NoticeVO board = noticeDAOBean.selectNoticeByNno(nno);
 		return board;
 	}

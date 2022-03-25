@@ -3,11 +3,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("로그인이 필요한 페이지입니다.");
-	if (window.opener) {
+	alert('로그인은 필수입니다.');
+	if(window.opener){
 		window.close();
-		window.opener.parent.location.href="<%=request.getContextPath() %>/";
-	} else {
-		window.parent.location.href="<%=request.getContextPath() %>/";
+		window.opener.parent.location.href="<%=request.getContextPath()%>/";
+	}else{
+		window.parent.location.href="<%=request.getContextPath()%>/";
 	}
 </script>

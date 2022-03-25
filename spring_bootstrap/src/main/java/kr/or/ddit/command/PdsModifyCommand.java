@@ -2,29 +2,36 @@ package kr.or.ddit.command;
 
 import com.jsp.dto.PdsVO;
 
-public class PdsModifyCommand extends PdsRegistCommand{
-	private String pno;
+public class PdsModifyCommand  extends PdsRegistCommand{
 	
+	private String pno;
 	private String[] deleteFile;
 	
-	public final String getPno() {
+	
+	public String getPno() {
 		return pno;
 	}
-	public final void setPno(String pno) {
+	public void setPno(String pno) {
 		this.pno = pno;
 	}
-	public final String[] getDeleteFile() {
+	public String[] getDeleteFile() {
 		return deleteFile;
 	}
-	public final void setDeleteFile(String[] deleteFile) {
+	public void setDeleteFile(String[] deleteFile) {
 		this.deleteFile = deleteFile;
 	}
 	
 	@Override
-	public PdsVO toPdsVO() {
+	public PdsVO toPdsVO(){
 		PdsVO pds = super.toPdsVO();
-		pds.setPno(Integer.parseInt(pno));
+		pds.setPno(Integer.parseInt(this.pno));	
 		
 		return pds;
 	}
 }
+
+
+
+
+
+

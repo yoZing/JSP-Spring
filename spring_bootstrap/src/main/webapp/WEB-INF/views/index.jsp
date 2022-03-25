@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+
 <script>
-	
-	if ('${loginUser.name }') {
+
+	if('${loginUser.name}'){
 		location.href="index.do";
-	} else {
+	}else{
 		location.href="common/loginForm.do";
 	}
-	
 </script>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 
 <!DOCTYPE html>
 <!--
@@ -10,43 +10,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title><decorator:title default="Woo's system" /></title>
+	<title><decorator:title default="kim's system"/></title>
 
-<!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-
-<style>
-	body {
-		background-color : #292e33;
-	}
-</style>
-
-
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
+  
+  <style>   
+   	body { background:#292e33;}
+  </style>
+  
 <decorator:head />
-</head>
 
+</head>
 <body>
-	
+
 <div class="wrapper">
 	<%@ include file="/WEB-INF/include/header.jsp" %>
-
+	
 	<%@ include file="/WEB-INF/include/aside.jsp" %>
-
-	<div class="content-wrapper">	
-		<decorator:body />
-	</div>
+		<div class="content-wrapper">
+			<decorator:body />
+		</div>
 	
 	<%@ include file="/WEB-INF/include/footer.jsp" %>
 </div>
 
-<!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -54,15 +50,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
-<script src="<%=request.getContextPath() %>/resources/js/common.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/common.js" ></script>
 
 <script>
 	$('div.wrapper').css({
 		"max-width":"1280px",
-		"min-width":"800px",
-		"margin":"0 auto"
+		"margin":"0 auto"		
 	});
-</script>
-
+</script>  
 </body>
+
+
+
+
 </html>
+
+
+
+
+
+

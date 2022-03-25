@@ -2,12 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<body>
 
 <script>
 	alert("삭제되었습니다.");
 	window.close();
 	window.opener.location.reload();
 </script>
-
-</body>

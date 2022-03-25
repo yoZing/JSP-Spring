@@ -14,18 +14,18 @@ import com.jsp.service.PdsService;
 import kr.or.ddit.dao.AttachDAOBean;
 import kr.or.ddit.dao.PdsDAOBean;
 
-public class PdsServiceImpl implements PdsService {
-
+public class PdsServiceImpl implements PdsService{
+	
 	private PdsDAOBean pdsDAOBean;
 	public void setPdsDAOBean(PdsDAOBean pdsDAOBean) {
 		this.pdsDAOBean = pdsDAOBean;
 	}
-
+	
 	private AttachDAOBean attachDAOBean;
 	public void setAttachDAOBean(AttachDAOBean attachDAOBean) {
 		this.attachDAOBean = attachDAOBean;
 	}
-
+	
 	@Override
 	public Map<String, Object> getList(Criteria cri) throws SQLException {
 		List<PdsVO> pdsList = pdsDAOBean.selectPdsCriteria(cri);
@@ -82,7 +82,9 @@ public class PdsServiceImpl implements PdsService {
 				attach.setPno(pds.getPno());
 				attach.setAttacher(pds.getWriter());
 				attachDAOBean.insertAttach(attach);
+
 			}
+
 	}
 
 	@Override
@@ -128,4 +130,5 @@ public class PdsServiceImpl implements PdsService {
 		pds.setAttachList(attachList);
 	}
 
+	
 }

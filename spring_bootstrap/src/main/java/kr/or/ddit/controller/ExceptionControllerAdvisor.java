@@ -15,29 +15,31 @@ import com.jsp.dto.MemberVO;
 @ControllerAdvice
 public class ExceptionControllerAdvisor {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ExceptionControllerAdvisor.class);
+
+	private static final Logger logger = 
+			LoggerFactory.getLogger(ExceptionControllerAdvisor.class);
 	
 	@ExceptionHandler(SQLException.class)
-	public String sqlExceptionPage(Exception e, Model model, HttpSession session) {
-		String url = "error/sqlException";
+	public String sqlExceptionPage(Exception e,Model model,HttpSession session){
+		String url="error/sqlException";
 		
 		logger.error(e.toString());
 		
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
 		
-		model.addAttribute("exception", e);
-		model.addAttribute("user", loginUser != null ? loginUser.getName() : "");
+		model.addAttribute("exception",e);
+		model.addAttribute("user",loginUser!=null ? loginUser.getName()+"님":"");
 		
-		return url;
+		
+		return url;		
 	}
 	
 	@ExceptionHandler(Exception.class)
-	public String exceptionPage(Exception e, Model modle, HttpSession session) {
-		String url = "error/500";
+	public String exceptionPage(Exception e,Model model,HttpSession session){
+		String url="error/500";
 		
 		logger.error(e.toString());
 		
-		return url;
+		return url;		
 	}
-	
 }

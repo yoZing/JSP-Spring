@@ -3,8 +3,9 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 
+
 <script>
-	alert("삭제되었습니다.");
+	alert("정상적으로 삭제되었습니다.");
 	window.close();
-	window.opener.location.reload();
+	window.opener.location.reload(true);
 </script>

@@ -1,5 +1,6 @@
 package kr.or.ddit.controller;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,104 +15,118 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jsp.command.Criteria;
-import com.jsp.command.CriteriaCommand;
 import com.jsp.dto.NoticeVO;
 import com.jsp.service.NoticeService;
 
 @Controller
-@RequestMapping("notice")
+@RequestMapping("/notice")
 public class NoticeController {
-	
+
+
 	@Autowired
 	private NoticeService noticeService;
 	
 	@RequestMapping("/main")
-	public void main() {}
+	public void main()throws Exception{}
+	
 	
 	@RequestMapping("/list")
-	public void list(Criteria cri, Model model) throws Exception {
+	public void list(Criteria cri, Model model)throws Exception{
 		
-		Map<String, Object> dataMap = noticeService.getNoticeList(cri);
-		
-		model.addAttribute("dataMap", dataMap);
+		Map<String,Object> dataMap = noticeService.getNoticeList(cri);		
+		model.addAttribute("dataMap",dataMap);
 	}
 	
 	@RequestMapping("/registForm")
-	public String registForm() {
-		String url = "notice/registForm";
-		
+	public String registForm(){
+		String url = "notice/regist";
 		return url;
 	}
 	
+	
 	@RequestMapping("/regist")
-	public String regist(NoticeVO notice, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+	public String regist(NoticeVO notice,HttpServletRequest request,
+						RedirectAttributes rttr) throws Exception{
 		String url = "redirect:/notice/list";
 		
-		notice.setTitle( (String) request.getAttribute("XSStitle"));
+		notice.setTitle((String)request.getAttribute("XSStitle"));
 		
-		noticeService.regist(notice);
+		noticeService.regist(notice);		
 		
-		rttr.addFlashAttribute("from", "regist");
+		rttr.addFlashAttribute("from","regist");
 		
 		return url;
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(int nno, @RequestParam(defaultValue = "") String from, HttpServletRequest request, ModelAndView mnv) throws Exception{
-		String url = "notice/detail";
+	public ModelAndView detail(int nno,  @RequestParam(defaultValue="") String from,
+							   HttpServletRequest request,
+							   ModelAndView mnv ) throws SQLException{
+		String url="notice/detail";
 		
 		NoticeVO notice = null;
 		
-		if (!from.equals("list")) {
+		if(!from.equals("list")) {
 			notice = noticeService.getNoticeForModify(nno);
-		} else {
+		}else {
 			notice = noticeService.getNotice(nno);
-			url = "redirect:/notice/detail.do?nno=" + nno;
+			url="redirect:/notice/detail.do?nno="+nno;
 		}
 		
-		mnv.addObject("notice", notice);
+		mnv.addObject("notice",notice);
 		mnv.setViewName(url);
 		
 		return mnv;
 	}
 	
 	@RequestMapping("/modifyForm")
-	public ModelAndView modifyForm(int nno, ModelAndView mnv) throws Exception {
-		String url = "notice/modifyForm";
+	public ModelAndView modifyForm(int nno,ModelAndView mnv) throws Exception{
+		String url="notice/modify";
 		
 		NoticeVO notice = noticeService.getNoticeForModify(nno);
 		
-		mnv.addObject("notice", notice);
+		mnv.addObject("notice",notice);
 		mnv.setViewName(url);
 		
 		return mnv;
+		
 	}
 	
-	@RequestMapping("/modify")
-	public String modifyPost(NoticeVO notice, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value="/modify",method=RequestMethod.POST)
+	public String modifyPost(NoticeVO notice,
+						     HttpServletRequest request,
+							 RedirectAttributes rttr)throws Exception{
 		String url = "redirect:/notice/detail.do";
 		
-		notice.setTitle((String) request.getAttribute("XSStitle"));
+		//notice.setTitle(HTMLInputFilter.htmlSpecialChars(notice.getTitle()));
+		notice.setTitle((String)request.getAttribute("XSStitle"));
 		
 		noticeService.modify(notice);
 		
-		rttr.addAttribute("nno", notice.getNno());
-		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("nno",notice.getNno());
+		rttr.addFlashAttribute("from","modify");
 		
 		return url;
-				
 	}
 	
-	@RequestMapping(value = "/remove", method = RequestMethod.GET)
-	public String remove(int nno, RedirectAttributes rttr) throws Exception {
-		String url = "redirect:/notice/detail";
+	@RequestMapping(value="/remove",method=RequestMethod.GET)
+	public String remove(int nno,RedirectAttributes rttr) throws Exception{
+		String url="redirect:/notice/detail.do";
+			
+		noticeService.remove(nno);		
 		
-		noticeService.remove(nno);
-		
-		rttr.addFlashAttribute("from", "remove");
-		rttr.addAttribute("nno", nno);
+		rttr.addFlashAttribute("from","remove");
+		rttr.addAttribute("nno",nno);
 		
 		return url;
 	}
 	
 }
+
+
+
+
+
+
+
+

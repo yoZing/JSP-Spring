@@ -56,7 +56,7 @@
 		board
 		where bno is not null  			  	
 		<include refid="search" />
-		order by regDate desc
+		order by regdate desc
 	</select>
 	
 	

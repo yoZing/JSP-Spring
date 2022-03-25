@@ -14,18 +14,19 @@ import com.jsp.service.LoginSearchMemberService;
 
 import kr.or.ddit.dao.MemberDAOBean;
 
-public class MemberServiceImpl implements LoginSearchMemberService {
+public class MemberServiceImpl implements LoginSearchMemberService{
 
+	
 	private MemberDAOBean memberDAOBean;
 	public void setMemberDAOBean(MemberDAOBean memberDAOBeanBean) {
 		this.memberDAOBean = memberDAOBeanBean;
 	}
-
+	
 	@Override
 	public MemberVO getMember(String id) throws Exception {
 
 		MemberVO member = memberDAOBean.selectMemberById(id);
-		
+			
 		return member;
 	}
 
@@ -35,10 +36,12 @@ public class MemberServiceImpl implements LoginSearchMemberService {
 		return memberList;
 	}
 
+	
+
 	@Override
 	public Map<String, Object> getSearchMemberList(Criteria cri) throws Exception {
 
-		Criteria searchCri = (Criteria) cri;
+		Criteria searchCri = (Criteria)cri;
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
 		PageMaker pageMaker = new PageMaker();
@@ -69,26 +72,33 @@ public class MemberServiceImpl implements LoginSearchMemberService {
 
 		memberDAOBean.deleteMember(id);
 
-	}
+	}	
 
 	@Override
-	public void enabled(String id, int state) throws Exception {
+	public void enabled(String id,int state) throws Exception {
 
-		memberDAOBean.enabledMember(id, state);
+		memberDAOBean.enabledMember(id,state);
 	}
 
-	public void login(String id, String pwd) throws IdNotFoundException, InvalidPasswordException, SQLException {
+	
+
+
+	
+	public void login(String id, String pwd) throws IdNotFoundException, InvalidPasswordException,SQLException {
 		MemberVO member = memberDAOBean.selectMemberById(id);
 		if (member == null)
 			throw new IdNotFoundException();
 		if (!pwd.equals(member.getPwd()))
 			throw new InvalidPasswordException();
+		
 	}
+
 
 	@Override
 	public List<MemberVO> getMemberList(Criteria cri) throws Exception {
 		List<MemberVO> memberList = memberDAOBean.selectMemberList(cri);
 		return memberList;
 	}
-
+	
+	
 }

@@ -16,42 +16,59 @@ import com.jsp.dto.MemberVO;
 
 public class LoginUserLogInterceptor extends HandlerInterceptorAdapter {
 	
-	private String savePath = "c:\\log";
+	private String savePath="c:\\log";;
 	private String saveFileName = "login_user_log.csv";
 	
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
 	}
-	
-	public void setSaveFileName(String saveFilePath) {
+	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
 	}
-
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
 		
-		MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
+		MemberVO loginUser=(MemberVO)request.getSession().getAttribute("loginUser");
 		
-		if (loginUser == null) return;
+		if(loginUser==null) return;
 		
-		// 로그인 정보를 스트링으로 저장
-		String tag = "[login:user]";
-		String log = tag + loginUser.getId() + ", "
-		                 + loginUser.getPhone() + ", "
-		                 + loginUser.getEmail() + ", "
-		                 + request.getRemoteAddr() + ", "
-		                 + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 		
-		File file = new File(savePath);
+		//로그인 정보를 스트링으로 저장.
+		String tag ="[login:user]";
+		String log =tag
+					+loginUser.getId()+","					
+					+loginUser.getPhone()+","
+					+loginUser.getEmail()+","
+					+request.getRemoteAddr()+","
+					+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+		File file=new File(savePath);
 		file.mkdirs();
 		
-		String logFilePath = savePath + File.separator + saveFileName;
-		BufferedWriter out = new BufferedWriter(new FileWriter(logFilePath, true));
-		
-		// 로그를 기록
+		String logFilePath=savePath+File.separator+saveFileName;	
+		BufferedWriter out=new BufferedWriter(new FileWriter(logFilePath,true));
+
+
+		//로그를 기록
 		out.write(log);
 		out.newLine();
 		
 		out.close();
 	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

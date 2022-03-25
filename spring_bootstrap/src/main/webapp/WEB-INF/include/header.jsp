@@ -3,39 +3,19 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-          <i class="fas fa-bars"></i>
-        </a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
-      <c:if test="${not empty menuList }">
-      	<c:forEach items="${menuList }" var="menu">
-		  <li class="nav-item d-none d-sm-inline-block ">
-            <a href="javascript:goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');subMenu_go('${menu.mcode }');" class="nav-link">
-              <i class="${menu.micon }"></i>${menu.mname }
-            </a>
-          </li>
-      	</c:forEach>
-      </c:if>
-      
-      <c:if test="${empty menuList }">
-      	<li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">해당 내용이 없습니다.</a>
-        </li>
-      </c:if>
-      
-	</ul>
-<!--       <li class="nav-item d-none d-sm-inline-block"> -->
-<!--         <a href="index3.html" class="nav-link">Home</a> -->
-<!--       </li> -->
-<!--       <li class="nav-item d-none d-sm-inline-block"> -->
-<!--         <a href="#" class="nav-link">Contact</a> -->
-<!--       </li> -->
-<!--     </ul> -->
+        <c:forEach items="${menuList }" var="menu">
+   	  	<li class="nav-item d-none d-sm-inline-block">
+        	<a href="javascript:goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');subMenu_go('${menu.mcode}');" class="nav-link"><i class="${menu.micon}"></i>&nbsp;${menu.mname }</a>
+   	   	</li>
+      </c:forEach>      
+    </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -71,7 +51,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -87,7 +67,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -103,7 +83,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Nora Silvester
@@ -158,3 +138,5 @@
       </li>
     </ul>
   </nav>
+
+</body>

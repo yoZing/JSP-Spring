@@ -7,11 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jsp.dto.PdsVO;
 
 public class PdsRegistCommand {
-
-	private String title;     // 제목 
-	private String content;   // 작성자
-	private String writer;    // 내용 
-	private List<MultipartFile> uploadFile; // 업로드 파일 배열
+	
+	
+	private String title;
+	private String content;
+	private String writer;
+	private List<MultipartFile> uploadFile;
 	
 	public String getTitle() {
 		return title;
@@ -38,10 +39,10 @@ public class PdsRegistCommand {
 		this.uploadFile = uploadFile;
 	}
 	
-	public PdsVO toPdsVO() {
+	public PdsVO toPdsVO(){
 		PdsVO pds = new PdsVO();
-		pds.setTitle(this.title);
 		pds.setContent(this.content);
+		pds.setTitle(this.title);
 		pds.setWriter(this.writer);
 		
 		return pds;

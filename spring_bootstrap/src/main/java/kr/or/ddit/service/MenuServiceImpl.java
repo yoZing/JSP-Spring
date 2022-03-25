@@ -8,10 +8,11 @@ import com.jsp.service.MenuService;
 
 import kr.or.ddit.dao.MenuDAOBean;
 
-public class MenuServiceImpl implements MenuService {
-
+public class MenuServiceImpl implements MenuService{
+		
 	private MenuDAOBean menuDAOBean;// = new MenuDAOImpl();
-	public void setMenuDAOBean(MenuDAOBean menuDAOBean) {
+
+	public void setMenuDAO(MenuDAOBean menuDAOBean) {
 		this.menuDAOBean = menuDAOBean;
 	}
 

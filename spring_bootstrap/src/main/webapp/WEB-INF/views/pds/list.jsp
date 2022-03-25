@@ -26,7 +26,8 @@
     		<div class="row mb-2">
     			<div class="col-sm-6">
 	      			<h1>자료실</h1>
-	      		</div>
+	      		</div>	      		
+	    	
 	       		
 	       		<div class="col-sm-6">
 			      <ol class="breadcrumb float-sm-right">
@@ -67,8 +68,8 @@
 								<i class="fa fa-fw fa-search"></i>
 							</button>
 						</span>
-					</div>				
-				</div>
+					</div>						
+				</div>			
 			</div>
 			<div class="card-body">
 				<table class="table table-bordered text-center">
@@ -93,7 +94,7 @@
 								<c:if test="${!empty pds.attachList }">
 									<i class="nav-icon fas fa-file"></i>
 								</c:if>
-								<c:if test="${!empty pds.attachList }">
+								<c:if test="${empty pds.attachList }">
 									<span>-</span>
 								</c:if>
 							</td>
@@ -118,9 +119,7 @@
 	
 	<c:if test="${from eq 'regist' }">
 		<script>
-			alert("성공적으로 등록되었습니다.");
-			window.opener.location.reload();
-			window.close();
+			alert("정상 등록되었습니다.");
 		</script>
 	</c:if>
 </body>

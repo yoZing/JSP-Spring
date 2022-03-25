@@ -18,6 +18,7 @@ public interface MemberDAOBean {
 		
 		// 회원정보 조회
 		MemberVO selectMemberById(String id) throws SQLException;
+		MemberVO selectMemberByPicture(String picture) throws SQLException;
 		
 		// 회원 추가
 		public void insertMember(MemberVO member) throws SQLException;
@@ -28,8 +29,9 @@ public interface MemberDAOBean {
 		// 회원정보 삭제
 		void deleteMember(String id) throws SQLException;
 		
-
 		// 회원 활성화
-		void enabledMember(String id, int enabled) throws SQLException;	
+		void enabledMember(String id, int enabled) throws SQLException;
+		
+		
 
 }

@@ -18,36 +18,44 @@ import com.jsp.dto.MemberVO;
 @Transactional
 public class TestMemberDAOBeanImpl {
 
+	
 	@Autowired
 	private MemberDAOBean memberDAOBean;
 	
 	@Test
-	public void testSelectMember() throws Exception {
-		String id = "woo";
+	public void testSelectMember()throws Exception{
+		String id="mimi";
+		
 		MemberVO member = memberDAOBean.selectMemberById(id);
 		
-		Assert.assertEquals(id, member.getId());
+		Assert.assertEquals(id,member.getId());
 	}
 	
+
 	@Test
 	@Rollback
-	public void testInsertMember() throws SQLException {
+	public void testInsertMember()throws SQLException{
 		MemberVO testMember = new MemberVO();
 		testMember.setId("kaka");
-		testMember.setPwd("pwd");
+		testMember.setPwd("kaka");
 		testMember.setName("kaka");
 		testMember.setEmail("kaka@kaka.net");
 		testMember.setPhone("000-0000-0000");
-		testMember.setPicture("noImage.jsp");
+		testMember.setPicture("noImage.jpg");
 		testMember.setAuthority("ROLE_USER");
 		
 		memberDAOBean.insertMember(testMember);
 		
 		MemberVO result = memberDAOBean.selectMemberById(testMember.getId());
 		
-		Assert.assertEquals(testMember.getId(), result.getId());
-		
+		Assert.assertEquals(testMember.getId(),result.getId());
 	}
-	
-	
 }
+
+
+
+
+
+
+
+

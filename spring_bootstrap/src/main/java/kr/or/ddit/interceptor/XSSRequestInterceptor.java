@@ -12,7 +12,8 @@ import com.josephoconnell.html.HTMLInputFilter;
 public class XSSRequestInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		
 		Enumeration<String> crossParamNames = request.getParameterNames();
 		
@@ -21,10 +22,12 @@ public class XSSRequestInterceptor extends HandlerInterceptorAdapter {
 			String paramName = crossParamNames.nextElement();
 			String paramValue = request.getParameter(paramName);
 			
-			request.setAttribute("XSS" + paramName, HTMLInputFilter.htmlSpecialChars(paramValue));
+			request.setAttribute("XSS"+paramName, HTMLInputFilter.htmlSpecialChars(paramValue));				
 			
 		}
+		
 		return true;
 	}
+	
 	
 }

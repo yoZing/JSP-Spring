@@ -3,6 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
 </head>
@@ -143,12 +144,13 @@
 </div>
 
 
+
 <form role="form">
 	<input type="hidden" name="bno" value="${board.bno }" />
 </form>
 
-
 <script>
+
 function modify_go(){
 	var formObj = $("form[role='form']");
 	formObj.attr({
@@ -167,19 +169,18 @@ function remove_go(){
 	}
 }
 
-<c:if test="${from eq 'modify'}">
-	alert("정상적으로 수정되었습니다.");
+<c:if test="${from eq 'modify'}" >
+	alert("정상적으로 수정되었습니다.");	
+</c:if>
+<c:if test="${from eq 'remove'}" >
+	alert("삭제되었습니다.");
+	window.close();
+	window.opener.location.reload();
 </c:if>
 
-<c:if test="${from eq 'remove'}">
-	alert("삭제되었습니다.");
-	window.opener.location.reload();
-	window.close();
-</c:if>
 </script>
 
-<%@ include file="./reply_js.jsp" %>
- 
+<%@ include file="./reply_js.jsp" %> 
 </body> 
  
  

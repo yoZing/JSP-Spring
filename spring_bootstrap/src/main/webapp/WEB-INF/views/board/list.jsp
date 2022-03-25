@@ -17,7 +17,7 @@
 
 <head></head>
 
-<title>자유게시판 목록</title>
+<title>자유게시판목록</title>
 
 <body>
 	 <!-- Main content -->
@@ -47,11 +47,11 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700);">게시글 등록</button>				
+				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','글등록',800,700);">게시글등록</button>				
 				<div id="keyword" class="card-tools" style="width:450px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
-					  		onchange="list_go(1);">
+					  		onchange="list_go();">
 					  		<option value="10" >정렬개수</option>
 					  		<option value="20" ${cri.perPageNum == 20 ? 'selected':''}>20개씩</option>
 					  		<option value="50" ${cri.perPageNum == 50 ? 'selected':''}>50개씩</option>
@@ -96,17 +96,20 @@
 					<c:forEach items="${boardList }" var="board">
 						<tr style='font-size:0.85em;'>
 							<td>${board.bno }</td>
-							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-								<a href="javascript:OpenWindow('detail.do?bno=${board.bno }&from=list','상세보기',800,700);">
-									<span class="col-sm-12 ">${board.title }
-										<c:if test="${board.replycnt ne 0 }">		
-											<span class="nav-item">															
-											&nbsp;&nbsp;<i class="fa fa-comment"></i>
-												<span class="badge badge-warning navbar-badge">${board.replycnt}</span>
-											</span>
-										</c:if>
-									</span>								
-								</a>
+							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
+												white-space: nowrap; text-overflow: ellipsis;">
+												
+							<a href="javascript:OpenWindow('detail.do?bno=${board.bno }&from=list','상세보기',800,700);">
+								<span class="col-sm-12 ">${board.title }
+									<c:if test="${board.replycnt ne 0 }">		
+										<span class="nav-item">															
+										&nbsp;&nbsp;<i class="fa fa-comment"></i>
+										<span class="badge badge-warning navbar-badge">${board.replycnt}</span>
+										</span>
+										
+									</c:if>
+								</span>								
+							</a>
 							</td>
 							<td>${board.writer }</td>
 							<td>
@@ -124,14 +127,21 @@
 		
     </section>
     <!-- /.content -->
-    
-    <c:if test="${from eq 'regist' }">
-    	<script>
-    		alert("등록되었습니다.");
-    		window.opener.location.reload();
-    		window.close();
-    	</script>
-    </c:if>
 
-
+	<c:if test="${from eq 'regist' }" >
+		<script>
+			alert("등록되었습니다.");
+			window.close();
+			window.opener.location.reload();			
+		</script>
+	</c:if>
 </body>
+
+
+
+
+
+
+
+
+

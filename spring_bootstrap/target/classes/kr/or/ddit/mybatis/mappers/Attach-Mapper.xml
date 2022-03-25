@@ -13,14 +13,14 @@
 	<select id="selectAttachByAno" resultType="attach">
 		select *
 		from attach
-		where ano = #{ano}
+		where ano=#{ano}
 	</select>
 	
 	<update id="insertAttach">
 		insert into 
 		attach (ano, uploadpath, filename, filetype, pno, attacher)
-		values (attach_seq.nextval, #{uploadPath}, #{fileName}, #{fileType}, 
-				#{pno}, #{attacher})
+		values (attach_seq.nextval, #{uploadPath}, #{fileName},#{fileType}, 
+				#{pno},#{attacher} )
 	</update>
 	
 	<update id="deleteAttach">

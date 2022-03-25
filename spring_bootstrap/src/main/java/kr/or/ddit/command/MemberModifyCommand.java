@@ -5,74 +5,75 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jsp.dto.MemberVO;
 
 public class MemberModifyCommand {
-	private String id;					// 아이디
-	private String pwd;					// 패스워드
-	private String name;				// 이름
-	private String phone;				// 전화번호
-	private String email;				// 이메일
-	private String authority;			// 권한
-	private MultipartFile picture;		// 사진파일
-	private String uploadPicture;		// 변경된 사진 파일명
-	
-	public final String getId() {
+		
+	private String id;  //아이디
+	private String pwd; //패스워드
+	private String name; //이름
+	private String phone; //전화번호
+	private String email;  //이메일
+	private String authority; //권한
+	private MultipartFile picture; // 사진파일	
+	private String uploadPicture; // 변경된 사진 파일명.
+	public String getId() {
 		return id;
 	}
-	public final void setId(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public final String getPwd() {
+	public String getPwd() {
 		return pwd;
 	}
-	public final void setPwd(String pwd) {
+	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	public final String getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public final void setPhone(String phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public final String getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	public final void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	public final String getAuthority() {
+	public String getAuthority() {
 		return authority;
 	}
-	public final void setAuthority(String authority) {
+	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public final MultipartFile getPicture() {
+	public MultipartFile getPicture() {
 		return picture;
 	}
-	public final void setPicture(MultipartFile picture) {
+	public void setPicture(MultipartFile picture) {
 		this.picture = picture;
 	}
-	public final String getUploadPicture() {
+	public String getUploadPicture() {
 		return uploadPicture;
 	}
-	public final void setUploadPicture(String uploadPicture) {
+	public void setUploadPicture(String uploadPicture) {
 		this.uploadPicture = uploadPicture;
 	}
 	
-	public MemberVO toMemberVO() {
+	public MemberVO toMember() {
 		MemberVO member = new MemberVO();
-		member.setId(id);
-		member.setPwd(pwd);
-		member.setName(name);
-		member.setPhone(phone);
-		member.setEmail(email);
-		member.setAuthority(authority);
-		
+		member.setId(this.id);
+		member.setPwd(this.pwd);
+		member.setName(this.name);
+		member.setPhone(this.phone.replace("-", ""));
+		member.setEmail(this.email);
+		member.setAuthority(this.authority);
+			
 		return member;
 	}
-
+	
+	
 }
