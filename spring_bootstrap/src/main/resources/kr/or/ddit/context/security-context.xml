@@ -64,11 +64,8 @@
 				expired-url="/common/loginExpired"
 				max-sessions="1"
 				session-registry-ref="sessionRegistry"
-								
 			/>		
 		</session-management>
-		
-			
 	</http>
 	
 </beans:beans>

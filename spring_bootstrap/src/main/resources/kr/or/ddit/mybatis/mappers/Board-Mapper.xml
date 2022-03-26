@@ -66,6 +66,12 @@
 		where bno=#{bno}
 	</select>
 	
+	<select id="selectBoardByImage" resultType="board">
+		select *
+		from board
+		where content like '%'||#{keyword}||'%'
+	</select>
+	
 	<update id="insertBoard" parameterType="board">
 		insert 
 		into 

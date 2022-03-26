@@ -17,5 +17,17 @@
 	<scheduled-tasks scheduler="memberPictureRemoveScheduler">
 		<scheduled ref="memberPictureRemoveTask" method="removePicture" cron="*/10 * * * * *"/>
 	</scheduled-tasks>
+	
+	<beans:bean id="summernoteImageRemoveTask"
+				class="kr.or.ddit.scheduler.RemoveSummernoteImageScheduler"
+				p:boardDAOBean-ref="boardDAOBean"
+				p:noticeDAOBean-ref="noticeDAOBean"
+				p:pdsDAOBean-ref="pdsDAOBean"
+				p:filePath-ref="imgPath"/>
+				
+	<scheduler id="summernoteImageScheduler"/>
+	<scheduled-tasks scheduler="summernoteImageScheduler">
+		<scheduled ref="summernoteImageRemoveTask" method="fileRemove" cron="*/20 * * * * *"/>
+	</scheduled-tasks>
 
 </beans:beans>

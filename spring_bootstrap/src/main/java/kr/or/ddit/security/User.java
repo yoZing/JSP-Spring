@@ -35,7 +35,6 @@ public class User implements UserDetails {
 		return member.getId();
 	}
 
-
 	@Override
 	public boolean isAccountNonExpired() { //기간제 계정의 경우 기간만료 여부  : enabled =4
 		return member.getEnabled()!=4;

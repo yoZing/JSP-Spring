@@ -23,4 +23,5 @@ public interface NoticeDAOBean {
 	void updateNotice(  NoticeVO Notice) throws SQLException;
 	
 	void deleteNotice(  int nno) throws SQLException;
+	
 }

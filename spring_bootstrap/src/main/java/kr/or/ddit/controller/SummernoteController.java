@@ -25,7 +25,7 @@ public class SummernoteController {
 	@Resource(name = "imgPath")
 	private String imgPath;
 
-	@RequestMapping("/uploadImg")
+	@RequestMapping(value = "/uploadImg", produces = "test/plain;charset=utf-8")
 	public ResponseEntity<String> uploadImg(MultipartFile file, HttpServletRequest request)throws IOException {
 		ResponseEntity<String> result = null;
 
@@ -62,6 +62,7 @@ public class SummernoteController {
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.CREATED);
 
 		} finally {
+			if (in != null)
 			in.close();
 		}
 

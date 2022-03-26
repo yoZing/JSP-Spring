@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,11 +40,14 @@ public class TestController2 {
 	}
 	
 	@RequestMapping(value = "test2/param3", method = RequestMethod.GET)
-	public String test3Param() {
+	public String test3Param(@ModelAttribute("message") String msg) {
 		String url = "test/main";
-		
 		
 		return url;
 	}
 	
+	@RequestMapping(value = "test/main", method = RequestMethod.GET)
+	public void test4Param() {
+		
+	}
 }
