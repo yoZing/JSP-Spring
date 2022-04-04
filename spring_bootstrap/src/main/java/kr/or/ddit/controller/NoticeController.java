@@ -27,19 +27,26 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping("/main")
-	public void main()throws Exception{}
+	public String main()throws Exception{
+		String url = "notice/main.open";
+		
+		return url;
+	}
 	
 	
 	@RequestMapping("/list")
-	public void list(Criteria cri, Model model)throws Exception{
+	public String list(Criteria cri, Model model)throws Exception{
+		String url = "notice/list.open";
 		
 		Map<String,Object> dataMap = noticeService.getNoticeList(cri);		
 		model.addAttribute("dataMap",dataMap);
+		
+		return url;
 	}
 	
 	@RequestMapping("/registForm")
 	public String registForm(){
-		String url = "notice/regist";
+		String url = "notice/regist.open";
 		return url;
 	}
 	
@@ -59,10 +66,8 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/detail")
-	public ModelAndView detail(int nno,  @RequestParam(defaultValue="") String from,
-							   HttpServletRequest request,
-							   ModelAndView mnv ) throws SQLException{
-		String url="notice/detail";
+	public ModelAndView detail(int nno,  @RequestParam(defaultValue="") String from, HttpServletRequest request, ModelAndView mnv ) throws SQLException{
+		String url="notice/detail.open";
 		
 		NoticeVO notice = null;
 		
@@ -81,7 +86,7 @@ public class NoticeController {
 	
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyForm(int nno,ModelAndView mnv) throws Exception{
-		String url="notice/modify";
+		String url="notice/modify.open";
 		
 		NoticeVO notice = noticeService.getNoticeForModify(nno);
 		
@@ -93,9 +98,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/modify",method=RequestMethod.POST)
-	public String modifyPost(NoticeVO notice,
-						     HttpServletRequest request,
-							 RedirectAttributes rttr)throws Exception{
+	public String modifyPost(NoticeVO notice, HttpServletRequest request, RedirectAttributes rttr)throws Exception{
 		String url = "redirect:/notice/detail.do";
 		
 		//notice.setTitle(HTMLInputFilter.htmlSpecialChars(notice.getTitle()));

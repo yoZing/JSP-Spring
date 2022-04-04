@@ -130,8 +130,6 @@ function regist_go(){
 	}
 	
 	$("form[role='form']").submit()
-
-	
 }
 
 </script> 

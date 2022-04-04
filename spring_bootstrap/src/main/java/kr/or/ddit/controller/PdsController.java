@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,11 +32,15 @@ public class PdsController {
 	private PdsService service;	
 	
 	@RequestMapping("/main")
-	public void main() throws Exception {}
+	public String main() throws Exception {
+		String url = "pds/main.open";
+		
+		return url;
+	}
 	
 	@RequestMapping("/list")
 	public ModelAndView list(Criteria cri, ModelAndView mnv) throws Exception {
-		String url = "pds/list";
+		String url = "pds/list.open";
 
 		Map<String, Object> dataMap = service.getList(cri);
 
@@ -47,7 +52,7 @@ public class PdsController {
 	
 	@RequestMapping("/registForm")
 	public String registForm() throws Exception {
-		String url = "pds/regist";
+		String url = "pds/regist.open";
 		return url;
 	}
 	
@@ -77,7 +82,7 @@ public class PdsController {
 	
 	@RequestMapping("/detail")
 	public ModelAndView detail(int pno, String from, ModelAndView mnv) throws Exception {
-		String url = "pds/detail";
+		String url = "pds/detail.open";
 
 		PdsVO pds = null;
 		if (from != null && from.equals("list")) {
@@ -106,7 +111,7 @@ public class PdsController {
 	
 	@RequestMapping("/modifyForm")
 	public ModelAndView modifyForm(ModelAndView mnv, int pno) throws Exception {
-		String url = "pds/modify";
+		String url = "pds/modify.open";
 
 		PdsVO pds = service.getPds(pno);
 		
@@ -192,6 +197,15 @@ public class PdsController {
 		return url;
 	}
 	
-	
-	
+	@RequestMapping("/getFile")
+	public String getFile(Model model, int ano) throws Exception {
+		String url = "downloadFile";
+		
+		AttachVO attach = service.getAttachByAno(ano);
+		
+		model.addAttribute("savedPath", attach.getUploadPath());
+		model.addAttribute("fileName", attach.getFileName());
+		
+		return url; 
+	}
 }

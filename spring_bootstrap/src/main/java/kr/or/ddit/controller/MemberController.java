@@ -37,12 +37,16 @@ public class MemberController {
 	private ExceptionLoggerHelper exceptionLogger;
 	
 	@RequestMapping("/main")
-	public void main() {}
+	public String main() {
+		String url = "member/main.open";
+		
+		return url;
+	}
 	
 	@RequestMapping("/list")
 	public ModelAndView list(Criteria cri,HttpServletRequest request,							
 							 ModelAndView mnv) throws SQLException {
-		String url = "member/list";
+		String url = "member/list.open";
 		
 		Map<String, Object> dataMap=null;
 		
@@ -66,7 +70,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
 	public String registForm() {
-		String url = "member/regist";
+		String url = "member/regist.open";
 		return url;
 	}
 	
@@ -84,7 +88,7 @@ public class MemberController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detail(String id, Model model) throws Exception {
 
-		String url = "member/detail";
+		String url = "member/detail.open";
 
 		MemberVO member = memberService.getMember(id);
 		model.addAttribute("member", member);
@@ -96,7 +100,7 @@ public class MemberController {
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
 	public String modifyForm(String id, Model model)throws Exception {
 
-		String url = "member/modify";
+		String url = "member/modify.open";
 
 		MemberVO member = memberService.getMember(id);
 		
@@ -203,11 +207,3 @@ public class MemberController {
 		return fileName;
 	}
 }
-
-
-
-
-
-
-
-

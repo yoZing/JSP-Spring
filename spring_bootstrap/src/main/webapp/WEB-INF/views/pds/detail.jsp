@@ -112,12 +112,13 @@ function submit_go(url,pno){
 }
 </script>
 
-<c:if test=${from eq 'modify'} >
+<c:if test="${from eq 'modify'}" >
 	<script>
 		alert("수정되었습니다.");
 	</script>
-</c:if>    
-<c:if test=${from eq 'remove'} >
+</c:if>
+
+<c:if test="${from eq 'remove'}" >
 	<script>
 		alert("삭제되었습니다.");
 		window.close();

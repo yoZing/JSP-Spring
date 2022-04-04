@@ -30,13 +30,13 @@ public class CommonController {
 	
 	@RequestMapping("/main")
 	public String main() {
-		String url="home";
+		String url="home.open";
 		return url;
 	}
 	
 	@RequestMapping("/index")
 	public String index(@RequestParam(defaultValue = "M000000")String mCode, Model model) throws SQLException {
-		String url = "common/indexPage";
+		String url = "common/indexPage.page";
 		
 		List<MenuVO> menuList = menuService.getMainMenuList();
 		MenuVO menu = menuService.getMenuByMcode(mCode);
@@ -61,16 +61,13 @@ public class CommonController {
 	
 	
 	@RequestMapping(value = "/common/loginForm", method = RequestMethod.GET)
-	public String loginForm(@RequestParam(defaultValue="")String error,
-							HttpServletResponse response) {
-		String url = "common/loginForm";		
+	public String loginForm(@RequestParam(defaultValue="")String error, HttpServletResponse response) {
+		String url = "common/loginForm.open";		
 		
 		if(error.equals("1")) {
 			response.setStatus(302);
 		}
 		return url;
-		
-		
 	}
 	
 	/*
